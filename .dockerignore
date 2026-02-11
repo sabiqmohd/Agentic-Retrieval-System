@@ -1,0 +1,11 @@
+agentic_venv/
+qdrant_data/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+*.ipynb
+debug_*.py
+verify_data.py
+demo_retrieval.py
+workspace.ipynb
