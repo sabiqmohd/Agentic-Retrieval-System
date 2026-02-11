@@ -9,20 +9,34 @@ This document explains **how** the system works, **why** certain decisions were 
 ### Diagram
 ```mermaid
 graph TD
-    subgraph "Agentic RAG Pipeline"
-        START --> Analyzer[<b>Query Analyzer</b><br>Classify & Extract]
+    subgraph "LangGraph RAG Workflow"
+        A[START] --> B[Query Analyzer]
         
-        Analyzer --> Retrieval[<b>Retrieval Agent</b><br>Hybrid Search + Reranking]
+        B --> C{Query Type?}
         
-        Retrieval --> Synthesizer[<b>Answer Synthesizer</b><br>Generate + Cite + Verify]
+        C -->|comparative| D["Retrieval Agent<br/>(multi_entity=True)"]
+        C -->|calculation| E["Retrieval Agent<br/>(numeric focus)"]
+        C -->|factual/summarization| F[Retrieval Agent]
         
-        Synthesizer --> END
+        D --> G[Answer Synthesizer]
+        E --> G
+        F --> G
+        
+        G --> H{needs_calculation?}
+        H -->|Yes| I[Calculator Tool]
+        I --> J[Generate Answer + Citations]
+        H -->|No| J
+        
+        J --> K[Verification Check]
+        K --> L[END]
     end
-
-    %% Styles
-    style Analyzer fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style Retrieval fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    style Synthesizer fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    
+    style B fill:#e1f5fe
+    style D fill:#fff3e0
+    style E fill:#fff3e0
+    style F fill:#fff3e0
+    style G fill:#e8f5e9
+    style I fill:#fce4ec
 ```
 
 ### State Management
