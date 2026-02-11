@@ -12,7 +12,7 @@ A multi-agent RAG system built with **LangGraph**, **FastAPI**, and **Qdrant**. 
 
 ```bash
 # 1. Clone and navigate
-cd Multi_doc_rag_agentic_workflow
+cd Agentic-Retrieval-System
 
 # 2. Add your API keys
 cp .env
