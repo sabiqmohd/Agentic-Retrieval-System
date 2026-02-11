@@ -49,6 +49,7 @@ chroma_db/
 tmp/
 logs/
 *.log
+src/__init__.py
 
 # Jupyter Notebooks
 .ipynb_checkpoints
