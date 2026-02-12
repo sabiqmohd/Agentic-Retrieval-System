@@ -291,7 +291,6 @@ def synthesizer_agent(state: RAGState) -> RAGState:
         has_sufficient_context = len(retrieved_chunks) > 0
     
     # Verification: basic hallucination check
-    # Check if key claims in answer can be traced to retrieved content
     verification_passed = has_sufficient_context and confidence_score >= 0.4
     
     return {
